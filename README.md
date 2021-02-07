@@ -1,5 +1,5 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). 
-This project contains a frontend code for a game that uses an external api. You can find deployed version of this game here: http://localhost:3000](http://localhost:3000)
+This project contains a frontend code for a game that uses an external api. You can find deployed version of this game here: [https://save-the-pony.vercel.app](https://save-the-pony.vercel.app)
 
 ## Getting Started
 
