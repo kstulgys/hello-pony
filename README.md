@@ -25,7 +25,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## Notes
 
-This is not a production-quality code but it's good enough to show a general approach to code architecture, usability, responsiveness, design, performance optimizations. This project should be a conversation starter to discuss some front-end challenges and possible solutions. 
+This repo is not a production-quality code but it's good enough to show a general approach to code architecture, usability, responsiveness, design, performance optimizations. This project should be a conversation starter to discuss some front-end challenges and possible solutions. 
 
 ## TODO
 
