@@ -24,6 +24,7 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
 
   const handleMazePropsChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
+      console.log(e.target.name)
       setMazeProps((prev) => ({ ...prev, [e.target.name]: e.target.valueAsNumber }))
     },
     [setMazeProps]

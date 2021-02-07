@@ -78,9 +78,8 @@ export function useGameAPI(): UseGameAPIResponse {
   usePonyMove({ refetch, mazeId })
 
   React.useEffect(() => {
-    if (mazeId) return
     getMazeId({ mazeProps }).then(setMazeId)
-  }, [mazeProps, mazeId])
+  }, [mazeProps])
 
   React.useEffect(() => {
     if (!mazeId) return
