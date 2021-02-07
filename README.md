@@ -32,5 +32,6 @@ This repo is not a production-quality code but it's good enough to show a genera
 - [ ] Improve test coverage (unit tests, integration, cypress)
 - [ ] Improve performance swaping inline-styles to CSS classes, CSS modules or CSS-in-JS
 - [ ] Improve folder structure, split components to separate folders/files
+- [ ] Improve async code error handling
 - [ ] Separate production and dev environments
 - [ ] Custom CI/CD
