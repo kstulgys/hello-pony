@@ -15,14 +15,14 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
   const { mazeData, mazeProps, setMazeProps, refetch, mazeId, restart } = useGameApiHook()
   usePonyMove({ refetch, mazeId })
 
-  const [zoom, setZoom] = React.useState(0.5)
+  const [zoom, setZoom] = React.useState(0.4)
   const [windowWidth] = useWindowSize()
 
   React.useLayoutEffect(() => {
     if (!!windowWidth && windowWidth < 600) setZoom(1)
   }, [windowWidth])
 
-  const handleWidthChange = React.useCallback(
+  const handleMazePropsChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
       setMazeProps((prev) => ({ ...prev, [e.target.name]: e.target.valueAsNumber }))
     },
@@ -48,7 +48,12 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
               <h1 style={{ textAlign: 'center' }}>Save The Pony</h1>
             </div>
             <div style={{ marginLeft: '1rem' }}>
-              <GameSettings handleWidthChange={handleWidthChange} handleZoomChange={handleZoomChange} mazeProps={mazeProps} zoom={zoom} />
+              <GameSettings
+                handleMazePropsChange={handleMazePropsChange}
+                handleZoomChange={handleZoomChange}
+                mazeProps={mazeProps}
+                zoom={zoom}
+              />
             </div>
           </div>
         </header>

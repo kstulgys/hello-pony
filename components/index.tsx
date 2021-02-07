@@ -176,13 +176,13 @@ export function Arrow({
 }
 
 interface GameSettingsProps {
-  handleWidthChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleMazePropsChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleZoomChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   mazeProps: MazeProps
   zoom: number
 }
 
-export function GameSettings({ handleWidthChange, handleZoomChange, mazeProps, zoom }: GameSettingsProps): JSX.Element {
+export function GameSettings({ handleMazePropsChange, handleZoomChange, mazeProps, zoom }: GameSettingsProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const onToggle = (): void => setIsOpen((prev) => !prev)
   const dropdownRef = React.useRef<HTMLDivElement | null>(null)
@@ -206,13 +206,13 @@ export function GameSettings({ handleWidthChange, handleZoomChange, mazeProps, z
             borderRadius: '0.5rem',
           }}
         >
-          <Slider handleWidthChange={handleWidthChange} name="maze-width" value={mazeProps['maze-width']} min={15} max={25} />
+          <Slider handleMazePropsChange={handleMazePropsChange} name="maze-width" value={mazeProps['maze-width']} min={15} max={25} />
 
-          <Slider handleWidthChange={handleWidthChange} name="maze-height" value={mazeProps['maze-height']} min={15} max={25} />
+          <Slider handleMazePropsChange={handleMazePropsChange} name="maze-height" value={mazeProps['maze-height']} min={15} max={25} />
 
-          <Slider handleWidthChange={handleWidthChange} name="difficulty" value={mazeProps.difficulty} min={1} max={10} />
+          <Slider handleMazePropsChange={handleMazePropsChange} name="difficulty" value={mazeProps.difficulty} min={1} max={10} />
 
-          <Slider handleWidthChange={handleZoomChange} name="zoom" value={zoom} min={0.1} max={1} step={0.1} />
+          <Slider handleMazePropsChange={handleZoomChange} name="zoom" value={zoom} min={0.1} max={1} step={0.1} />
         </div>
       )}
     </div>
@@ -220,14 +220,14 @@ export function GameSettings({ handleWidthChange, handleZoomChange, mazeProps, z
 }
 
 export function Slider({
-  handleWidthChange,
+  handleMazePropsChange,
   value,
   name,
   min,
   max,
   step = 1,
 }: {
-  handleWidthChange: (e: any) => void
+  handleMazePropsChange: (e: any) => void
   value: number
   name: string
   min: number
@@ -240,7 +240,7 @@ export function Slider({
         <p style={{ fontWeight: 600, textTransform: 'capitalize' }}>{name}</p>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <input onChange={handleWidthChange} type="range" id={name} name={name} min={min} max={max} value={value} step={step} />
+        <input onChange={handleMazePropsChange} type="range" id={name} name={name} min={min} max={max} value={value} step={step} />
         <label style={{ marginLeft: 'auto' }} htmlFor="difficulty">
           {value}
         </label>
