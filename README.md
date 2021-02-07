@@ -34,9 +34,3 @@ This repo is not a production-quality code but it's good enough to show a genera
 - [ ] Improve folder structure, split components to separate folders/files
 - [ ] Separate production and dev environments
 - [ ] Custom CI/CD
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
