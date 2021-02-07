@@ -24,7 +24,6 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
 
   const handleMazePropsChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
-      console.log(e.target.name)
       setMazeProps((prev) => ({ ...prev, [e.target.name]: e.target.valueAsNumber }))
     },
     [setMazeProps]
@@ -59,7 +58,7 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
           </div>
         </header>
         <main>{isGameOver ? <GameOver mazeData={mazeData} restart={restart} /> : <MazeGrid mazeData={mazeData} zoom={zoom} />}</main>
-        <MoveControls mazeId={mazeId} refetch={refetch} />
+        {!isGameOver && <MoveControls mazeId={mazeId} refetch={refetch} />}
       </ErrorBoundary>
     </Layout>
   )

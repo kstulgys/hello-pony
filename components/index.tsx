@@ -120,7 +120,6 @@ export function MoveControls({ mazeId, refetch }: MoveControlsProps): JSX.Elemen
   }, [])
 
   const handleOnArrowClick = async (name: string): Promise<void> => {
-    console.log({ name })
     if (name === DIRECTIONS.NORTH) await movePony({ direction: DIRECTIONS.NORTH, mazeId })
     if (name === DIRECTIONS.SOUTH) await movePony({ direction: DIRECTIONS.SOUTH, mazeId })
     if (name === DIRECTIONS.WEST) await movePony({ direction: DIRECTIONS.WEST, mazeId })
@@ -164,7 +163,6 @@ export function Arrow({
   emoji: string
   handleOnArrowClick: (name: string) => void
 }): JSX.Element {
-  console.log({ name })
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div onClick={() => handleOnArrowClick(name)} tabIndex={0} role="button" style={{ opacity }}>
@@ -249,7 +247,12 @@ export function Slider({
   )
 }
 
-export function GameOver({ mazeData, restart }: { mazeData: MazeData; restart: () => void }): JSX.Element {
+interface GameOverProps {
+  mazeData: MazeData
+  restart: () => void
+}
+
+export function GameOver({ mazeData, restart }: GameOverProps): JSX.Element {
   const gameOverUrl = `https://ponychallenge.trustpilot.com${mazeData?.['game-state']['hidden-url']}`
   const gameOverMessage = mazeData?.['game-state']?.['state-result']
 

@@ -73,13 +73,18 @@ export function useGameAPI(): UseGameAPIResponse {
   const [count, setCount] = React.useState(0)
 
   const refetch = React.useCallback((): void => setCount((prev) => prev + 1), [])
-  const restart = React.useCallback((): void => setMazeId(''), [])
+
+  const restart = React.useCallback(async (): Promise<void> => {
+    const id = await getMazeId({ mazeProps })
+    setMazeId(id)
+    getMaze({ mazeId: id }).then(setMazeData)
+  }, [mazeProps])
 
   usePonyMove({ refetch, mazeId })
 
   React.useEffect(() => {
-    getMazeId({ mazeProps }).then(setMazeId)
-  }, [mazeProps])
+    restart()
+  }, [restart])
 
   React.useEffect(() => {
     if (!mazeId) return
