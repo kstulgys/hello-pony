@@ -27,12 +27,13 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 This repo is not a production-quality code but it's good enough to show a general approach to code architecture, usability, responsiveness, design, performance optimizations. This project should be a conversation starter to discuss some front-end challenges and possible solutions. 
 
-TODO:
+## TODO
+
 - [ ] Improve test coverage (unit tests, integration, cypress)
 - [ ] Improve performance swaping inline-styles to CSS classes, CSS modules or CSS-in-JS
 - [ ] Improve folder structure, split components to separate folders/files
 - [ ] Separate production and dev environments
-- [ ] Implement custom CI/CD
+- [ ] Custom CI/CD
 
 ## Deploy on Vercel
 
