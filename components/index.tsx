@@ -145,7 +145,6 @@ export function MoveControls({ mazeId, refetch }: MoveControlsProps): JSX.Elemen
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '-0.8rem' }}>
           <Arrow name={DIRECTIONS.WEST} opacity={west} emoji="⬅️" handleOnArrowClick={handleOnArrowClick} />
-
           <Arrow name={DIRECTIONS.SOUTH} opacity={south} emoji="⬇️" handleOnArrowClick={handleOnArrowClick} />
           <Arrow name={DIRECTIONS.EAST} opacity={east} emoji="➡️" handleOnArrowClick={handleOnArrowClick} />
         </div>
@@ -256,13 +255,13 @@ export function GameOver({ mazeData, restart }: { mazeData: MazeData; restart: (
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <p style={{ fontSize: '1.5rem' }}>{gameOverMessage}</p>
-      <img style={{ height: '50vh', objectFit: 'contain', width: '100%' }} src={gameOverUrl} alt="game state url" />
-      <div style={{ padding: '2rem 0 2rem 0' }}>
+      <div style={{ padding: '2rem 0 0 0' }}>
         <button onClick={restart} style={{ fontSize: '1.5rem' }}>
           Restart The Game
         </button>
       </div>
+      <p style={{ fontSize: '1.5rem' }}>{gameOverMessage}</p>
+      <img style={{ height: '50vh', objectFit: 'contain', width: '100%' }} src={gameOverUrl} alt="game state url" />
     </div>
   )
 }

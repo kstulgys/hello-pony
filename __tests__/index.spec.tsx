@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
 import { render } from '@testing-library/react'
-import Home, { UseGameApiResponse } from '.'
+import Home, { UseGameApiResponse } from '../pages'
 import { MazeData } from '../utils/types'
-import { ErrorBoundary } from '../components'
 import { MAZE_INITIAL_PROPS } from '../utils/hooks'
+import { ErrorBoundary } from '../components'
 
 const sampleMazeData: MazeData = {
   data: [['south'], [], []],
