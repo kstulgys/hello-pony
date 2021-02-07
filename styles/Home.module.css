@@ -1,13 +1,13 @@
 .container {
-  min-height: 100vh;
-  padding: 0 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
-.main {
+/* .main {
   padding: 5rem 0;
   flex: 1;
   display: flex;
@@ -119,4 +119,4 @@
     width: 100%;
     flex-direction: column;
   }
-}
+} */
