@@ -36,3 +36,4 @@ This is not a "production ready" code but it's good enough to show a general app
 - [ ] Improve async code error handling
 - [ ] Separate prod and dev environments
 - [ ] Add CI/CD
+- [ ] Maybe less verbose code could be achieved using React Context API
