@@ -1,5 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). 
-This project is a game that uses an external API to interact with game state. The frontend rendering is implemented with Reactjs library. You can find deployed version of this game here: [https://save-the-pony.vercel.app](https://save-the-pony.vercel.app)
+This project is a game that uses an external API to interact with game state. The frontend rendering is implemented with Reactjs library. You can find deployed version of this game here: 
+[https://save-the-pony.vercel.app](https://save-the-pony.vercel.app)
 
 ## Getting Started
 
