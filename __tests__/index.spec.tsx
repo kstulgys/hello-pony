@@ -2,12 +2,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import Home, { UseGameApiResponse } from '../pages'
-import { MazeData } from '../utils/types'
+import { MazeData, DIRECTIONS } from '../utils/types'
 import { MAZE_INITIAL_PROPS } from '../utils/hooks'
 import { ErrorBoundary } from '../components'
 
 const sampleMazeData: MazeData = {
-  data: [['south'], [], []],
+  data: [[DIRECTIONS.SOUTH], [], []],
   size: [15, 15],
   domokun: [0],
   pony: [1],
@@ -61,9 +61,7 @@ function mockUseGameApiResponse(props: Partial<UseGameApiResponse> = {}): Partia
   return {
     mazeData: undefined,
     mazeProps: MAZE_INITIAL_PROPS,
-    // mazeId: '',
     // setMazeProps: () => {},
-    // refetch: () => {},
     // restart: () => {},
     ...props,
   }

@@ -1,21 +1,20 @@
 import React from 'react'
-import { MazeProps, MazeData, DIRECTIONS } from '../types'
-import { getMazeId, getMaze, movePony } from '../../api/pony'
+import { MazeProps, MazeData, DIRECTIONS, Wall } from '../types'
+import { getMaze, createPonyMove, getMazeById } from '../../api/pony'
 
-export function usePonyMove({ refetch, mazeId }: { refetch: () => void; mazeId: string }): void {
+export function usePonyMove({ movePonyTo }: { movePonyTo: ({ direction }: { direction: Wall }) => Promise<void> }): void {
   React.useEffect(() => {
     const handleOnKeyDown = async (e: KeyboardEvent): Promise<void> => {
-      if (e.key === 'ArrowUp') await movePony({ direction: DIRECTIONS.NORTH, mazeId })
-      if (e.key === 'ArrowDown') await movePony({ direction: DIRECTIONS.SOUTH, mazeId })
-      if (e.key === 'ArrowLeft') await movePony({ direction: DIRECTIONS.WEST, mazeId })
-      if (e.key === 'ArrowRight') await movePony({ direction: DIRECTIONS.EAST, mazeId })
-      refetch()
+      if (e.key === 'ArrowUp') await movePonyTo({ direction: DIRECTIONS.NORTH })
+      if (e.key === 'ArrowDown') await movePonyTo({ direction: DIRECTIONS.SOUTH })
+      if (e.key === 'ArrowLeft') await movePonyTo({ direction: DIRECTIONS.WEST })
+      if (e.key === 'ArrowRight') await movePonyTo({ direction: DIRECTIONS.EAST })
     }
     document.addEventListener('keydown', handleOnKeyDown)
     return () => {
       document.removeEventListener('keydown', handleOnKeyDown)
     }
-  }, [mazeId, refetch])
+  }, [movePonyTo])
 }
 
 export function useWindowSize(): number[] {
@@ -61,9 +60,8 @@ export interface UseGameAPIResponse {
   mazeData: MazeData | undefined
   mazeProps: MazeProps
   setMazeProps: React.Dispatch<React.SetStateAction<MazeProps>>
-  refetch: () => void
-  mazeId: string
-  restart: () => void
+  restart: () => Promise<void>
+  movePonyTo: ({ direction }: { direction: Wall }) => Promise<void>
 }
 
 export function useGameAPI(): UseGameAPIResponse {
@@ -74,13 +72,17 @@ export function useGameAPI(): UseGameAPIResponse {
 
   const refetch = React.useCallback((): void => setCount((prev) => prev + 1), [])
 
-  const restart = React.useCallback(async (): Promise<void> => {
-    const id = await getMazeId({ mazeProps })
-    setMazeId(id)
-    getMaze({ mazeId: id }).then(setMazeData)
-  }, [mazeProps])
+  const movePonyTo = async ({ direction }: { direction: Wall }): Promise<void> => {
+    createPonyMove({ direction, mazeId }).then(refetch)
+  }
 
-  usePonyMove({ refetch, mazeId })
+  usePonyMove({ movePonyTo })
+
+  const restart = React.useCallback(async (): Promise<void> => {
+    const { data, mazeId } = await getMaze({ mazeProps })
+    setMazeData(data)
+    setMazeId(mazeId)
+  }, [mazeProps])
 
   React.useEffect(() => {
     restart()
@@ -88,8 +90,8 @@ export function useGameAPI(): UseGameAPIResponse {
 
   React.useEffect(() => {
     if (!mazeId) return
-    getMaze({ mazeId }).then(setMazeData)
+    getMazeById({ mazeId }).then(setMazeData)
   }, [mazeId, count])
 
-  return { mazeData, mazeProps, setMazeProps, refetch, mazeId, restart }
+  return { mazeData, mazeProps, setMazeProps, restart, movePonyTo }
 }

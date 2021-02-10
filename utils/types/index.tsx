@@ -1,9 +1,14 @@
 type PonyNames = 'Spike' | 'Applejack' | 'Rainbow Dash' | 'Pinkie Pie' | 'Rarity' | 'Fluttershy'
-export type Walls = 'south' | 'west' | 'east' | 'north'
+export type Wall = DIRECTIONS.SOUTH | DIRECTIONS.WEST | DIRECTIONS.EAST | DIRECTIONS.NORTH
 export type GameEntities = '😈' | '🦄' | '🚪' | ''
-
+export enum DIRECTIONS {
+  'SOUTH' = 'south',
+  'WEST' = 'west',
+  'EAST' = 'east',
+  'NORTH' = 'north',
+}
 export interface MovePonyProps {
-  direction: Walls
+  direction: Wall
   mazeId: string
 }
 
@@ -15,7 +20,7 @@ export interface MazeProps {
 }
 
 export interface MazeData {
-  data: Walls[][]
+  data: Wall[][]
   size: [number, number]
   domokun: [number]
   pony: [number]
@@ -25,11 +30,4 @@ export interface MazeData {
     'state-result': string
     'hidden-url': string
   }
-}
-
-export enum DIRECTIONS {
-  'SOUTH' = 'south',
-  'WEST' = 'west',
-  'EAST' = 'east',
-  'NORTH' = 'north',
 }

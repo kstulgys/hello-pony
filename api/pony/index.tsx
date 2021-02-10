@@ -10,11 +10,17 @@ export async function getMazeId({ mazeProps }: { mazeProps: MazeProps }): Promis
   return maze_id
 }
 
-export async function getMaze({ mazeId }: { mazeId: string }): Promise<MazeData> {
+export async function getMazeById({ mazeId }: { mazeId: string }): Promise<MazeData> {
   const { data }: { data: MazeData } = await axios.get(`${BASE_URL}/maze/${mazeId}`)
   return data
 }
 
-export async function movePony({ direction, mazeId }: MovePonyProps): Promise<unknown> {
+export async function getMaze({ mazeProps }: { mazeProps: MazeProps }): Promise<{ data: MazeData; mazeId: string }> {
+  const mazeId = await getMazeId({ mazeProps })
+  const { data }: { data: MazeData } = await axios.get(`${BASE_URL}/maze/${mazeId}`)
+  return { data, mazeId }
+}
+
+export async function createPonyMove({ direction, mazeId }: MovePonyProps): Promise<unknown> {
   return axios.post(`${BASE_URL}/maze/${mazeId}`, { direction })
 }

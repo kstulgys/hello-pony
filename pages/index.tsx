@@ -1,19 +1,15 @@
 import React from 'react'
-import { useWindowSize, useGameAPI, usePonyMove } from '../utils/hooks'
+import { useWindowSize, useGameAPI } from '../utils/hooks'
 import { GameSettings, MazeGrid, MoveControls, GameOver, GameLoader, Layout, ErrorBoundary } from '../components'
 
-export type UseGameApiResponse = Pick<
-  ReturnType<typeof useGameAPI>,
-  'mazeData' | 'mazeProps' | 'setMazeProps' | 'refetch' | 'mazeId' | 'restart'
->
+export type UseGameApiResponse = Pick<ReturnType<typeof useGameAPI>, 'mazeData' | 'mazeProps' | 'setMazeProps' | 'restart' | 'movePonyTo'>
 
 interface HomeProps {
   useGameApiHook?: () => UseGameApiResponse
 }
 
 export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.Element {
-  const { mazeData, mazeProps, setMazeProps, refetch, mazeId, restart } = useGameApiHook()
-  usePonyMove({ refetch, mazeId })
+  const { mazeData, mazeProps, setMazeProps, restart, movePonyTo } = useGameApiHook()
 
   const [zoom, setZoom] = React.useState(0.4)
   const [windowWidth] = useWindowSize()
@@ -58,7 +54,7 @@ export default function Home({ useGameApiHook = useGameAPI }: HomeProps): JSX.El
           </div>
         </header>
         <main>{isGameOver ? <GameOver mazeData={mazeData} restart={restart} /> : <MazeGrid mazeData={mazeData} zoom={zoom} />}</main>
-        {!isGameOver && <MoveControls mazeId={mazeId} refetch={refetch} />}
+        {!isGameOver && <MoveControls movePonyTo={movePonyTo} />}
       </ErrorBoundary>
     </Layout>
   )

@@ -1,8 +1,7 @@
 import React from 'react'
-import { MazeProps, DIRECTIONS, MazeData, Walls, GameEntities } from '../utils/types'
+import { MazeProps, DIRECTIONS, MazeData, GameEntities, Wall } from '../utils/types'
 import { useWindowSize, useOnClickOutside } from '../utils/hooks'
 import { FiSettings } from 'react-icons/fi'
-import { movePony } from '../api/pony'
 import Head from 'next/head'
 
 interface MazeDataGridProps {
@@ -44,7 +43,7 @@ interface MazeTileProps {
   mazeWidth: number
   mazeLength: number
   cellIndex: number
-  walls: Walls[]
+  walls: Wall[]
   tileSize: string
   emoji: GameEntities
 }
@@ -98,11 +97,10 @@ const initialOpacity = {
 }
 
 export interface MoveControlsProps {
-  mazeId: string
-  refetch: () => void
+  movePonyTo: ({ direction }: { direction: Wall }) => Promise<void>
 }
 
-export function MoveControls({ mazeId, refetch }: MoveControlsProps): JSX.Element {
+export function MoveControls({ movePonyTo }: MoveControlsProps): JSX.Element {
   const [{ north, west, east, south }, setArrowsOpacity] = React.useState(initialOpacity)
 
   React.useEffect(() => {
@@ -120,11 +118,10 @@ export function MoveControls({ mazeId, refetch }: MoveControlsProps): JSX.Elemen
   }, [])
 
   const handleOnArrowClick = async (name: string): Promise<void> => {
-    if (name === DIRECTIONS.NORTH) await movePony({ direction: DIRECTIONS.NORTH, mazeId })
-    if (name === DIRECTIONS.SOUTH) await movePony({ direction: DIRECTIONS.SOUTH, mazeId })
-    if (name === DIRECTIONS.WEST) await movePony({ direction: DIRECTIONS.WEST, mazeId })
-    if (name === DIRECTIONS.EAST) await movePony({ direction: DIRECTIONS.EAST, mazeId })
-    refetch()
+    if (name === DIRECTIONS.NORTH) await movePonyTo({ direction: DIRECTIONS.NORTH })
+    if (name === DIRECTIONS.SOUTH) await movePonyTo({ direction: DIRECTIONS.SOUTH })
+    if (name === DIRECTIONS.WEST) await movePonyTo({ direction: DIRECTIONS.WEST })
+    if (name === DIRECTIONS.EAST) await movePonyTo({ direction: DIRECTIONS.EAST })
   }
 
   return (
@@ -225,7 +222,7 @@ export function Slider({
   max,
   step = 1,
 }: {
-  handleMazePropsChange: (e: any) => void
+  handleMazePropsChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   value: number
   name: string
   min: number
