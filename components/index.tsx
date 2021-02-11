@@ -52,14 +52,7 @@ export const MazeTile = React.memo((props: MazeTileProps) => {
   const { mazeWidth, mazeLength, cellIndex, walls, tileSize, emoji } = props
 
   const isMazeRightTile = React.useMemo(() => (cellIndex + 1) % mazeWidth === 0, [cellIndex, mazeWidth])
-
-  const isMazeBottomTile = React.useMemo(() => {
-    return [...Array(mazeWidth).keys()]
-      .map((i) => {
-        return i + Math.round(mazeLength - mazeWidth)
-      })
-      .includes(cellIndex)
-  }, [cellIndex, mazeWidth, mazeLength])
+  const isMazeBottomTile = React.useMemo(() => mazeLength - mazeWidth - 1 < cellIndex, [mazeLength, mazeWidth, cellIndex])
 
   const cellWallsStyle = {
     borderTop: walls.includes(DIRECTIONS.NORTH) ? '2px solid' : '',
@@ -288,7 +281,13 @@ export function Layout({ title, children }: { title: string; children: React.Rea
       }}
     >
       <Head>
-        <title>{title}</title>
+        <title>
+          <span role="img" aria-label="pony emoji">
+            🦄
+          </span>
+          | {title}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}
