@@ -281,12 +281,7 @@ export function Layout({ title, children }: { title: string; children: React.Rea
       }}
     >
       <Head>
-        <title>
-          <span role="img" aria-label="pony emoji">
-            🦄
-          </span>
-          | {title}
-        </title>
+        <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>

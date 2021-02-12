@@ -18,6 +18,7 @@ export async function getMazeById({ mazeId }: { mazeId: string }): Promise<MazeD
 export async function getMaze({ mazeProps }: { mazeProps: MazeProps }): Promise<{ data: MazeData; mazeId: string }> {
   const mazeId = await getMazeId({ mazeProps })
   const { data }: { data: MazeData } = await axios.get(`${BASE_URL}/maze/${mazeId}`)
+
   return { data, mazeId }
 }
 
